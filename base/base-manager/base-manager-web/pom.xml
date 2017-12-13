@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <artifactId>base-manager</artifactId>
+        <groupId>com.kk</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../../base-manager/pom.xml</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>base-manager-web</artifactId>
+    <packaging>war</packaging>
+
+    <name>base-manager-web Maven Webapp</name>
+    <url>http://maven.apache.org</url>
+
+    <dependencies>
+        <!-- 依赖于service -->
+        <dependency>
+            <groupId>com.kk</groupId>
+            <artifactId>base-manager-service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>base-manager-web</finalName>
+    </build>
+</project>
