@@ -1,4 +1,4 @@
-package com.kk.common.spring.sshxcut;
+package com.kk.study.framework.sshxcute;
 
 import net.neoremind.sshxcute.core.ConnBean;
 import net.neoremind.sshxcute.core.Result;

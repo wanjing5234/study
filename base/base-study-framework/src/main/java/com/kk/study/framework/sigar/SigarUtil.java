@@ -1,4 +1,4 @@
-package com.kk.common.spring.sigar;
+package com.kk.study.framework.sigar;
 
 import com.google.common.io.Resources;
 import org.hyperic.sigar.*;

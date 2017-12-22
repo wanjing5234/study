@@ -1,4 +1,4 @@
-package com.kk.common.spring.sigar;
+package com.kk.study.framework.sigar;
 
 public class RuntimeTest {
 
