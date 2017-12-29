@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    
+    <properties>
+		<property name="dialect" value="mysql" />
+	</properties>
+    
+    <typeAliases>
+		<typeAlias alias="ocActivity" type="com.cloudafort.flexsafe.model.OcActivity" />
+		<typeAlias alias="adminUser" type="com.cloudafort.flexsafe.model.AdminUser" />
+		<typeAlias alias="user" type="com.cloudafort.flexsafe.model.User" />
+		<typeAlias alias="userImport" type="com.cloudafort.flexsafe.model.UserImport" />
+		<typeAlias alias="groups" type="com.cloudafort.flexsafe.model.Groups" />
+		<typeAlias alias="userGroups" type="com.cloudafort.flexsafe.model.UserGroups" />
+		<typeAlias alias="accountInfo" type="com.cloudafort.flexsafe.model.AccountInfo" />
+		<typeAlias alias="backupConfig" type="com.cloudafort.flexsafe.model.BackupConfig" />
+		<typeAlias alias="backupItem" type="com.cloudafort.flexsafe.model.BackupItem" />
+		<typeAlias alias="storagePlanning" type="com.cloudafort.flexsafe.model.StoragePlanning" />
+		<typeAlias alias="shareDir" type="com.cloudafort.flexsafe.model.ShareDir" />
+		<typeAlias alias="shareOwner" type="com.cloudafort.flexsafe.model.ShareOwner" />
+		<typeAlias alias="logs" type="com.cloudafort.flexsafe.model.Logs" />
+		<typeAlias alias="archiveDir" type="com.cloudafort.flexsafe.model.ArchiveDir" />
+		<typeAlias alias="takeOverUserFileArchive" type="com.cloudafort.flexsafe.model.TakeOverUserFileArchive" />
+		<typeAlias alias="systemSettingsShutdown" type="com.cloudafort.flexsafe.model.SystemSettingsShutdown" />
+		<typeAlias alias="globalConfig" type="com.cloudafort.flexsafe.model.GlobalConfig" />
+		<typeAlias alias="message" type="com.cloudafort.flexsafe.model.Message" />
+		<typeAlias alias="ocFileCache" type="com.cloudafort.flexsafe.model.OcFileCache" />
+		<typeAlias alias="ocFileShare" type="com.cloudafort.flexsafe.model.OcFileShare" />
+		<typeAlias alias="ocFileTrash" type="com.cloudafort.flexsafe.model.OcFilesTrash" />
+		<typeAlias alias="ocStorages" type="com.cloudafort.flexsafe.model.OcStorages" />
+		<typeAlias alias="ocGroupUser" type="com.cloudafort.flexsafe.model.OcGroupUser" />
+		
+		<typeAlias alias="filePreview" type="com.cloudafort.flexsafe.model.FilePreview" />
+		<typeAlias alias="remoteServer" type="com.cloudafort.flexsafe.model.remote.RemoteServer" />
+		<typeAlias alias="remoteUser" type="com.cloudafort.flexsafe.model.remote.RemoteUser" />
+		<typeAlias alias="remoteEmail" type="com.cloudafort.flexsafe.model.remote.RemoteEmail" />
+		<typeAlias alias="remoteBroadcastFile" type="com.cloudafort.flexsafe.model.remote.RemoteBroadcastFile" />
+	</typeAliases>
+	
+	<typeHandlers>
+        <!-- <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="com.cloudafort.flexsafe.model.ShareType"/> -->
+    </typeHandlers>
+	
+	<plugins> 
+		<!-- 特别注意：5.0.0版本和之前到版本是不一样的，之前是：com.github.pagehelper.PageHelper -->  
+    	<plugin interceptor="com.github.pagehelper.PageInterceptor">
+    		<!-- 该参数默认为false -->  
+            <!-- 设置为true时，会将RowBounds第一个参数offset当成pageNum页码使用 -->  
+            <!-- 和startPage中的pageNum效果一样-->  
+            <property name="offsetAsPageNum" value="true"/>  
+            <!-- 该参数默认为false -->  
+            <!-- 设置为true时，使用RowBounds分页会进行count查询 -->  
+            <property name="rowBoundsWithCount" value="true"/>  
+            <!-- 设置为true时，如果pageSize=0或者RowBounds.limit = 0就会查询出全部的结果 -->  
+            <!-- （相当于没有执行分页查询，但是返回结果仍然是Page类型）-->  
+            <property name="pageSizeZero" value="true"/>  
+            <!-- 支持通过Mapper接口参数来传递分页参数 -->  
+            <property name="supportMethodsArguments" value="true"/>
+    	</plugin>
+	</plugins>
+	
+	<mappers>
+		<mapper resource="com/cloudafort/flexsafe/mapping/OcActivityMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/AdminUserMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/UserMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/UserImportMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/GroupsMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/UserGroupsMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/AccountInfoMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/BackupConfigMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/BackupItemMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/StoragePlanningMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/ShareDirMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/ShareOwnerMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/LogsMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/ArchiveDirMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/TakeOverUserFileArchiveMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/SystemSettingsShutdownMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/GlobalConfigMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/MessageMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/OcFileShareMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/OcFilesTrashMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/OcStoragesMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/OcFileCacheMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/OcGroupUserMapper.xml" />
+		
+		<mapper resource="com/cloudafort/flexsafe/mapping/FilePreviewMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/RemoteServerMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/RemoteUserMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/RemoteEmailMapper.xml" />
+		<mapper resource="com/cloudafort/flexsafe/mapping/RemoteBroadcastFileMapper.xml" />
+	</mappers>
+    
+</configuration>
+

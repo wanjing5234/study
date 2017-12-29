@@ -1,0 +1,10 @@
+/apps/workspaces/study/base/base-ssm-framework/src/main/java/com/kk/ssm/service/impl/PersonService.java
+/apps/workspaces/study/base/base-ssm-framework/src/main/java/com/kk/ssm/controller/PluploadController.java
+/apps/workspaces/study/base/base-ssm-framework/src/main/java/com/kk/ssm/model/Person.java
+/apps/workspaces/study/base/base-ssm-framework/src/main/java/com/kk/ssm/service/impl/UserServiceImpl.java
+/apps/workspaces/study/base/base-ssm-framework/src/main/java/com/kk/ssm/controller/UserController.java
+/apps/workspaces/study/base/base-ssm-framework/src/main/java/com/kk/ssm/model/Plupload.java
+/apps/workspaces/study/base/base-ssm-framework/src/main/java/com/kk/ssm/service/IPersonService.java
+/apps/workspaces/study/base/base-ssm-framework/src/main/java/com/kk/ssm/service/IUserService.java
+/apps/workspaces/study/base/base-ssm-framework/src/main/java/com/kk/ssm/service/PluploadService.java
+/apps/workspaces/study/base/base-ssm-framework/src/main/java/com/kk/ssm/model/User.java

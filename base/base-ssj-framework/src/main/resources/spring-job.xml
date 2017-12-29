@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- 线程执行器配置，用于任务注册 
+		线程池，用来并行执行每个对应的job，提高效率，这也是上面提到不推荐使用jdk自身timer的一个很重要的原因
+	-->
+	<bean id="executor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+	  <property name="corePoolSize" value="5" />
+	  <property name="maxPoolSize" value="10" />
+	  <property name="queueCapacity" value="25" />
+	</bean>
+
+	<!--	业务类的配置:要调度的对象	-->	
+	<bean id="regularCheckLicenceJob" class="com.cloudafort.flexsafe.job.RegularCheckLicenceJob" />
+	<bean id="regularCheckSystemTimeCallbackInRunJob" class="com.cloudafort.flexsafe.job.RegularCheckSystemTimeCallbackInRunJob" />
+	
+	<!-- JobDetail的配置,要调度的对象是一个具体的类
+		targetObject 要执行的类
+		targetMethod 要执行类当中的方法
+		concurrent 是否立即马上执行（当，类实例化后）
+	-->	
+	<bean id="regularCheckLicenceDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		<property name="targetObject" ref="regularCheckLicenceJob" />
+		<property name="targetMethod" value="execute" />  
+		<!-- concurrent是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+        <property name="concurrent" value="false" />
+    </bean>  
+    
+    <bean id="regularCheckSystemTimeCallbackInRunDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+		<property name="targetObject" ref="regularCheckSystemTimeCallbackInRunJob" />
+		<property name="targetMethod" value="execute" />  
+        <property name="concurrent" value="false" />
+    </bean>  
+    
+    <!--	Trigger的配置		
+    	触发器，它用于定义Job何时执行。最常用的是SimpleTrigger和CronTrigger。
+		一般来说，如果你需要在一个固定的时间和重复次数或者一个固定的间隔时间，那么SimpleTrigger比较合适；
+                     如果你有许多复杂的作业调度，那么CronTrigger比较合适。 
+        CronTrigger和 Unix的cron机制基本一样，我们需要的只是一个cron表达式。 
+    -->	
+    <bean id="regularCheckLicenceTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+       <property name="jobDetail" ref="regularCheckLicenceDetail"/>  
+       <property name="cronExpression" value="0 58 23 * * ?"/><!-- 每天半夜触发一次 -->  
+	</bean>  
+	
+	<bean id="regularCheckSystemTimeCallbackInRunTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+       <property name="jobDetail" ref="regularCheckSystemTimeCallbackInRunDetail"/>  
+       <property name="cronExpression" value="0 0 0/1 * * ?"/><!-- 每隔1小时触发一次 -->  
+	</bean>  
+	
+	<!--	Scheduler的配置		
+		Scheduler和 SchedulerFactory：Scheduler负责管理 Trigger、调度 Job，
+     	SchedulerFactory则是Scheduler工厂，负责生成Scheduler。
+	-->	
+	<bean id="myScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <!--作业调度器,list下可加入其他的调度器-->
+            <list>
+                <ref bean="regularCheckLicenceTrigger"></ref>
+                <ref bean="regularCheckSystemTimeCallbackInRunTrigger"></ref>
+            </list>
+        </property>
+        <!-- SchedulerFactoryBean在初始化后是否马上启动Scheduler，默认为true。如果设置为false，需要手工启动Scheduler； -->
+        <property name="autoStartup" value="true" />
+        <property name="taskExecutor" ref="executor" />
+    </bean>
+	
+</beans> 
